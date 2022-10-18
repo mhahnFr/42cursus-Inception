@@ -1,0 +1,22 @@
+version: '2'
+networks:
+  arsch:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+          gateway: 172.20.0.1
+
+services:
+  raven:
+    build: ./requirements/raven
+    image: raven
+    container_name: raven
+    environment:
+      - TZ=Europe/Berlin
+    expose:
+      - 4242
+    networks:
+      arsch:
+        ipv4_address: 172.20.0.2
+    volumes:
+      - "/home/mhahn/srcs/requirements/raven/melian:/home/admin/melian:Z"
