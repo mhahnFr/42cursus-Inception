@@ -7,6 +7,19 @@ networks:
           gateway: 172.20.0.1
 
 services:
+  mariadb:
+    restart: unless-stopped
+    build: ./requirements/mariadb
+    image: mariadb
+    container_name: mariadb
+    environment:
+      - TZ=Europe/Berlin
+    networks:
+      arsch:
+        ipv4_address: 172.20.0.3
+    volumes:
+      - "/home/mhahn/data/wordpress-db:/var/lib/mysql:z"
+
   raven:
     restart: unless-stopped
     build: ./requirements/bonus/raven
