@@ -8,7 +8,8 @@ networks:
 
 services:
   raven:
-    build: ./requirements/raven
+    restart: unless-stopped
+    build: ./requirements/bonus/raven
     image: raven
     container_name: raven
     environment:
@@ -19,4 +20,4 @@ services:
       arsch:
         ipv4_address: 172.20.0.2
     volumes:
-      - "/home/mhahn/srcs/requirements/raven/melian:/home/admin/melian:Z"
+      - "/home/mhahn/srcs/requirements/bonus/raven/melian:/home/admin/melian:Z"
