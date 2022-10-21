@@ -24,7 +24,7 @@ services:
       arsch:
         ipv4_address: 172.20.0.3
     volumes:
-      - "/home/mhahn/data/wordpress-db:/var/lib/mysql:z"
+      - wordpress_db:/var/lib/mysql:z
 
   raven:
     restart: unless-stopped
@@ -40,3 +40,11 @@ services:
         ipv4_address: 172.20.0.2
     volumes:
       - "/home/mhahn/srcs/requirements/bonus/raven/melian:/home/admin/melian:Z"
+
+volumes:
+  wordpress_db:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "/home/mhahn/data/wordpress-db"
