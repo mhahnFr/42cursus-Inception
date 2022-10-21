@@ -15,4 +15,41 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
  && chmod +x wp-cli.phar \
  && mv wp-cli.phar /usr/local/bin/wp
 
-ENTRYPOINT ["php-fpm8"]
+ARG DB_NAME
+ARG DB_USER_NAME
+ARG DB_USER_PWD
+ARG DB_HOST
+
+ARG DOMAIN_NAME
+ARG BLOG_TITLE
+ARG WP_ROOT_USER
+ARG WP_ROOT_PWD
+ARG WP_ROOT_MAIL
+
+ARG WP_USER
+ARG WP_USER_MAIL
+ARG WP_USER_PWD
+
+RUN mkdir -p /var/www/html
+
+RUN ln `which php8` /usr/local/bin/php
+
+RUN cd /var/www/html \
+ && wp core download --allow-root \
+ && wp config create --dbname=${DB_NAME} \
+                     --dbuser=${DB_USER_NAME} \
+                     --dbpass=${DB_USER_PWD} \
+                     --dbhost=${DB_HOST} \
+                     --locale=en_GER \
+                     --allow-root \
+ && wp core install --url=${DOMAIN_NAME} \
+                    --title=${BLOG_TITLE} \
+                    --admin_user=${WP_ROOT_USER} \
+                    --admin_password=${WP_ROOT_PWD} \
+                    --admin_email=${WP_ROOT_MAIL} \
+                    --allow-root \
+ && wp user create ${WP_USER} ${WP_USER_MAIL} --role=administrator --user_pass=${WP_USER_PWD} --allow-root
+
+EXPOSE 9000
+
+ENTRYPOINT ["php-fpm8", "-F"]
