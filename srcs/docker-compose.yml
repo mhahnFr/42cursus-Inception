@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 networks:
   arsch:
     ipam:
@@ -9,7 +9,13 @@ networks:
 services:
   mariadb:
     restart: unless-stopped
-    build: ./requirements/mariadb
+    build:
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+      args:
+        - MARIADB_NAME=${MARIADB_NAME}
+        - MARIADB_USER=${MARIADB_USER}
+        - MARIADB_PWD=${MARIADB_PWD}
     image: mariadb
     container_name: mariadb
     environment:
