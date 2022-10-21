@@ -20,6 +20,8 @@ services:
     container_name: mariadb
     environment:
       - TZ=Europe/Berlin
+    expose:
+      - 3306
     networks:
       arsch:
         ipv4_address: 172.20.0.3
@@ -48,3 +50,10 @@ volumes:
       type: none
       o: bind
       device: "/home/mhahn/data/wordpress-db"
+
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "/home/mhahn/data/wordpress-data"
