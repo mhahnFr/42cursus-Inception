@@ -28,6 +28,25 @@ services:
     volumes:
       - wordpress_db:/var/lib/mysql:z
 
+  wordpress:
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+    build:
+      context: ./requirements/wordpress_phpfpm
+      dockerfile: Dockerfile
+      args:
+        - A=A
+    image: wordpress
+    container_name: wordpress
+    environment:
+      - TZ=Europe/Berlin
+    networks:
+      arsch:
+        ipv4_address: 172.20.0.4
+    volumes:
+      - wordpress_data:/some/where/over/the/rainbow:z
+
   raven:
     restart: unless-stopped
     build: ./requirements/bonus/raven
