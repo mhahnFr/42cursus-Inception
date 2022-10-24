@@ -37,7 +37,7 @@ services:
         - DB_NAME=${MARIADB_NAME}
         - DB_USER_NAME=${MARIADB_USER}
         - DB_USER_PWD=${MARIADB_PWD}
-        - DB_HOST=mariadb
+        - DB_HOST=db
         - DOMAIN_NAME=${DOMAIN_NAME}
         - BLOG_TITLE=${WP_BLOG_TITLE}
         - WP_ROOT_USER=${WP_ROOT_USER}
