@@ -11,6 +11,8 @@ tmpdir          = /tmp
 lc-messages-dir = /usr/share/mysql
 skip-external-locking
 
+bind-address = 0.0.0.0
+
 log_error       = /var/log/mysql/error.log
 
 [embedded]
