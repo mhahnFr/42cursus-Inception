@@ -14,21 +14,6 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
  && chmod +x wp-cli.phar \
  && mv wp-cli.phar /usr/local/bin/wp
 
-ARG DB_NAME
-ARG DB_USER_NAME
-ARG DB_USER_PWD
-ARG DB_HOST
-
-ARG DOMAIN_NAME
-ARG BLOG_TITLE
-ARG WP_ROOT_USER
-ARG WP_ROOT_PWD
-ARG WP_ROOT_MAIL
-
-ARG WP_USER
-ARG WP_USER_MAIL
-ARG WP_USER_PWD
-
 RUN mkdir -p /var/www/html
 
 RUN ln `which php8` /usr/local/bin/php

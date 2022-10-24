@@ -1,17 +1,15 @@
 #!/bin/sh
 
-echo $DB_NAME
-
 cd /var/www/html \
  && wp core download --allow-root \
- && wp config create --dbname=${DB_NAME} \
-                     --dbuser=${DB_USER_NAME} \
-                     --dbpass=${DB_USER_PWD} \
-                     --dbhost=${DB_HOST} \
+ && wp config create --dbname=${MARIADB_NAME} \
+                     --dbuser=${MARIADB_USER} \
+                     --dbpass=${MARIADB_PWD} \
+                     --dbhost=${MARIADB_HOST} \
                      --locale=en_GER \
                      --allow-root \
  && wp core install --url=${DOMAIN_NAME} \
-                    --title=${BLOG_TITLE} \
+                    --title=${WP_BLOG_TITLE} \
                     --admin_user=${WP_ROOT_USER} \
                     --admin_password=${WP_ROOT_PWD} \
                     --admin_email=${WP_ROOT_MAIL} \
