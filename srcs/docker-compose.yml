@@ -1,13 +1,9 @@
 version: '3'
 networks:
   arsch:
-    ipam:
-      config:
-        - subnet: 172.20.0.0/24
-          gateway: 172.20.0.1
 
 services:
-  mariadb:
+  db:
     restart: unless-stopped
     build:
       context: ./requirements/mariadb
@@ -24,14 +20,15 @@ services:
       - 3306
     networks:
       arsch:
-        ipv4_address: 172.20.0.3
     volumes:
       - wordpress_db:/var/lib/mysql:z
+    healthcheck:
+      test: mysql -e "SELECT VERSION();"
 
   wordpress:
-    # TODO: Healthcheck of database
     depends_on:
-      - mariadb
+      db:
+        condition: service_healthy
     restart: unless-stopped
     build:
       context: ./requirements/wordpress_phpfpm
@@ -53,11 +50,8 @@ services:
     container_name: wordpress
     environment:
       - TZ=Europe/Berlin
-    expose:
-      - 9000
     networks:
       arsch:
-        ipv4_address: 172.20.0.4
     volumes:
       - wordpress_data:/some/where/over/the/rainbow:z
 
@@ -78,7 +72,6 @@ services:
       - 443
     networks:
       arsch:
-        ipv4_address: 172.20.0.5
     volumes:
       - wordpress_data:/some/where/over/the/rainbow:z
 
@@ -93,7 +86,6 @@ services:
       - 4242
     networks:
       arsch:
-        ipv4_address: 172.20.0.2
     volumes:
       - "/home/mhahn/srcs/requirements/bonus/raven/melian:/home/admin/melian:Z"
 
