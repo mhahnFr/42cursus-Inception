@@ -9,6 +9,7 @@ clean: stop
 	- sudo docker rmi $(shell sudo docker images -q)
 	- sudo docker container prune
 	- sudo docker image prune
+	- $(shell sudo rm -rf ./data/wordpress-db/\*)
 
 re: clean
 	$(MAKE) run
