@@ -12,6 +12,7 @@ services:
         - MARIADB_NAME=${MARIADB_NAME}
         - MARIADB_USER=${MARIADB_USER}
         - MARIADB_PWD=${MARIADB_PWD}
+        - MARIADB_ROOT_PWD=${MARIADB_ROOT_PWD}
     image: mariadb
     container_name: mariadb
     environment:
@@ -22,13 +23,14 @@ services:
       arsch:
     volumes:
       - wordpress_db:/var/lib/mysql:z
-    healthcheck:
-      test: mysql -e "SELECT VERSION();"
+#    healthcheck:
+#      test: mysql -u root -e "SELECT VERSION();"
 
   wordpress:
     depends_on:
-      db:
-        condition: service_healthy
+      - db
+#     db:
+#        condition: service_healthy
     restart: unless-stopped
     build:
       context: ./requirements/wordpress_phpfpm
@@ -43,25 +45,25 @@ services:
       - wordpress_data:/some/where/over/the/rainbow:z
     env_file: .env
 
-  nginx:
-    depends_on:
-      - wordpress
-    restart: unless-stopped
-    build:
-      context: ./requirements/nginx
-      dockerfile: Dockerfile
-      args:
-        - A=A
-    image: nginx
-    container_name: nginx
-    environment:
-      - TZ=Europe/Berlin
-    expose:
-      - 443
-    networks:
-      arsch:
-    volumes:
-      - wordpress_data:/some/where/over/the/rainbow:z
+#  nginx:
+#    depends_on:
+#      - wordpress
+#   restart: unless-stopped
+#   build:
+#     context: ./requirements/nginx
+#     dockerfile: Dockerfile
+#     args:
+#       - A=A
+#   image: nginx
+#   container_name: nginx
+#   environment:
+#     - TZ=Europe/Berlin
+#   expose:
+#     - 443
+#   networks:
+#     arsch:
+#   volumes:
+#     - wordpress_data:/some/where/over/the/rainbow:z
 
   raven:
     restart: unless-stopped
