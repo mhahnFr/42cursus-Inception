@@ -14,9 +14,12 @@ ARG MARIADB_ROOT_PWD
 
 RUN mysqld_safe --user=mysql --datadir=/var/lib/mysql & sleep 1 \
  && mysql -u root -e "CREATE DATABASE IF NOT EXISTS ${MARIADB_NAME};" \
+ && mysql -u root -e "CREATE USER IF NOT EXISTS '${MARIADB_USER}'@'localhost' IDENTIFIED BY '${MARIADB_PWD}';" \
  && mysql -u root -e "CREATE USER IF NOT EXISTS '${MARIADB_USER}'@'%' IDENTIFIED BY '${MARIADB_PWD}';" \
+ && mysql -u root -e "GRANT ALL PRIVILEGES ON ${MARIADB_NAME}.* TO '${MARIADB_USER}'@'localhost';" \
  && mysql -u root -e "GRANT ALL PRIVILEGES ON ${MARIADB_NAME}.* TO '${MARIADB_USER}'@'%';" \
  && mysql -u root -e "FLUSH PRIVILEGES;" \
+ && mysql -u root -e "DROP USER ''@'localhost';" \
  && mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PWD}';"
 
 EXPOSE 3306
