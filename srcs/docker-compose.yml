@@ -3,7 +3,7 @@ networks:
   arsch:
 
 services:
-  db:
+  mariadb:
     restart: unless-stopped
     build:
       context: ./requirements/mariadb
@@ -26,7 +26,7 @@ services:
 
   wordpress:
     depends_on:
-      db:
+      mariadb:
         condition: service_healthy
     restart: unless-stopped
     build:
