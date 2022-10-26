@@ -23,10 +23,13 @@ services:
       arsch:
     volumes:
       - wordpress_db:/var/lib/mysql:z
+    healthcheck:
+      test: mysql -u root --password="${MARIADB_ROOT_PWD}" -e "SELECT VERSION();"
 
   wordpress:
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     restart: unless-stopped
     build:
       context: ./requirements/wordpress_phpfpm
