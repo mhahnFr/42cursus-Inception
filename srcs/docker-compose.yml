@@ -17,8 +17,6 @@ services:
     container_name: mariadb
     environment:
       - TZ=Europe/Berlin
-    expose:
-      - 3306
     networks:
       arsch:
     volumes:
