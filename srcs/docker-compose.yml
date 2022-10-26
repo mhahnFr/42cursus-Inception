@@ -39,7 +39,7 @@ services:
     networks:
       arsch:
     volumes:
-      - wordpress_data:/some/where/over/the/rainbow:z
+      - wordpress_data:/var/www/wordpress:z
     env_file: .env
 
 #  nginx:
