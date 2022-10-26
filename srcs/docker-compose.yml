@@ -42,25 +42,23 @@ services:
       - wordpress_data:/var/www/wordpress:z
     env_file: .env
 
-#  nginx:
-#    depends_on:
-#      - wordpress
-#   restart: unless-stopped
-#   build:
-#     context: ./requirements/nginx
-#     dockerfile: Dockerfile
-#     args:
-#       - A=A
-#   image: nginx
-#   container_name: nginx
-#   environment:
-#     - TZ=Europe/Berlin
-#   expose:
-#     - 443
-#   networks:
-#     arsch:
-#   volumes:
-#     - wordpress_data:/some/where/over/the/rainbow:z
+  nginx:
+    depends_on:
+      - wordpress
+    restart: unless-stopped
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    image: nginx
+    container_name: nginx
+    environment:
+      - TZ=Europe/Berlin
+    ports:
+      - "443:443"
+    networks:
+      arsch:
+    volumes:
+      - wordpress_data:/var/www/wordpress:z
 
   raven:
     restart: unless-stopped

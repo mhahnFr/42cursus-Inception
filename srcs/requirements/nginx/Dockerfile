@@ -1,10 +1,12 @@
 FROM alpine:edge
 
-RUN apk update && apk upgrade && apk add nginx
+RUN apk update && apk upgrade && apk add nginx openssl
 
-COPY conf         /etc/nginx/nginx.conf
-COPY fastcgi_conf /etc/nginx/fastcgi_params
+COPY conf /etc/nginx/http.d/nginx.conf
 
-RUN nginx -t
+#RUN nginx -t
 
-ENTRYPOINT ["nginx"]
+RUN openssl req -x509 -days 365 -nodes -newkey rsa:4096 -keyout /etc/ssl/private/nginx.key \
+                                                        -out /etc/ssl/certs/nginx.crt -sha256 -subj "/CN=mhahn.42.fr"
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
