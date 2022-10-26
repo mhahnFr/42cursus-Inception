@@ -12,7 +12,10 @@ clean: stop
 	- sudo docker rmi $(shell sudo docker images -q)
 	- sudo docker container prune
 	- sudo docker image prune
-	- $(shell sudo rm -rf ./data/wordpress-db/\*)
+	- $(shell sudo find ./data/wordpress-db -print -delete)
+	- $(shell sudo find ./data/wordpress-data -print -delete)
+	- mkdir ./data/wordpress-db
+	- mkdir ./data/wordpress-data
 
 re: clean
 	$(MAKE) run
