@@ -1,6 +1,9 @@
 run:
 	sudo docker-compose -f srcs/docker-compose.yml --env-file srcs/.env up --build -d
 
+log:
+	sudo docker-compose -f srcs/docker-compose.yml --env-file srcs/.env logs
+
 stop:
 	- sudo docker kill $(shell sudo docker ps -q)
 
@@ -14,4 +17,4 @@ clean: stop
 re: clean
 	$(MAKE) run
 
-.PHONY: re clean run stop
+.PHONY: re clean run stop log
