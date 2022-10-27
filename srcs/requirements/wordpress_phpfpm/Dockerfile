@@ -22,6 +22,8 @@ RUN ln `which php8` /usr/local/bin/php
 
 EXPOSE 9000
 
-COPY ./arsch.sh /usr/local/bin/arsch.sh
-RUN chmod +x /usr/local/bin/arsch.sh
-ENTRYPOINT ["/usr/local/bin/arsch.sh"]
+COPY ./entry.sh /usr/local/bin/entry.sh
+
+RUN chmod +x /usr/local/bin/entry.sh
+
+ENTRYPOINT ["/usr/local/bin/entry.sh"]
