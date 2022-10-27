@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.16.2
 
 EXPOSE 4242
 
