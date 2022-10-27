@@ -67,8 +67,8 @@ services:
     container_name: raven
     environment:
       - TZ=Europe/Berlin
-    expose:
-      - 4242
+    ports:
+      - "4242:4242"
     networks:
       arsch:
     volumes:
