@@ -6,7 +6,11 @@ RUN apk update \
             php8-pecl-imagick php8-cli    php8-dev     php8-imap    php8-mbstring php8-opcache \
             php8-redis        php8-soap   php8-zip     php8-phar    curl          mysql-client
 
+RUN rm -rf /etc/php8/php-fpm.d/www.conf
+
 COPY ./conf /etc/php8/php-fpm.d/www.conf
+
+RUN mkdir /run/php
 
 RUN php-fpm8 -t
 
