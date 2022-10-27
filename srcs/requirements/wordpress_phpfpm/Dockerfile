@@ -8,11 +8,9 @@ RUN apk update \
 
 RUN rm -rf /etc/php8/php-fpm.d/www.conf
 
-COPY ./conf /etc/php8/php-fpm.d/www.conf
+COPY ./www.conf /etc/php8/php-fpm.d/www.conf
 
 RUN mkdir /run/php
-
-RUN php-fpm8 -t
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
  && chmod +x wp-cli.phar \
