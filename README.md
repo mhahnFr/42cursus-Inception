@@ -39,4 +39,16 @@ volume.
 ### Final notes
 This repository will not be developed any further.
 
-© Copyright 2022 [mhahnFr](https://www.github.com/mhahnFr)
+© Copyright 2022 [mhahnFr]
+
+[42 school]: https://www.42heilbronn.de/learncoderepeat
+[Docker]: https://www.docker.com
+[Debian buster]: https://www.debian.org/releases/buster/
+[Alpine Linux]: https://www.alpinelinux.org
+[NGINX]: https://www.nginx.com
+[Wordpress]: https://wordpress.org
+[MariaDB]: https://mariadb.com
+[Raven MUD]: https://www.github.com/nijakow/raven
+[TLS]: https://en.wikipedia.org/wiki/Transport_Layer_Security
+[PHP]: https://www.php.net
+[mhahnFr]: https://www.github.com/mhahnFr
