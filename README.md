@@ -19,6 +19,22 @@ Additionally, two volumes:
 As a bonus, I set up the [Raven MUD] using another volume for the necessary `mudlib`.
 
 ### Approach
+#### [MariaDB]
+In the beginning, I set up the container for [MariaDB]. It should be accessible inside
+of the [Docker] network on port `3306`.
+
+#### [Wordpress] and `php-fpm`
+Next, I settled up wordpress and the [PHP] CGI handler. It should be accessible inside
+of the [Docker] network on port `9000`.
+
+#### [NGINX]
+With the CGI handler and the database settled up, I added the web server. It should accept
+only encrypted connections via [TLS] in version `1.2` or `1.3`. It should be accessible
+from anywhere on port `443`.
+
+#### [Raven MUD]
+As a additional bonus, I set up the [Raven MUD]. The necessary `mudlib` is mounted as additional
+volume.
 
 ### Final notes
 This repository will not be developed any further.
