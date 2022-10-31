@@ -34,7 +34,7 @@ from anywhere on port `443`.
 
 #### [Raven MUD]
 As a additional bonus, I set up the [Raven MUD]. The necessary `mudlib` is mounted as additional
-volume.
+volume and was written by [nijakow].
 
 ### Final notes
 This repository will not be developed any further.
@@ -52,3 +52,4 @@ This repository will not be developed any further.
 [TLS]: https://en.wikipedia.org/wiki/Transport_Layer_Security
 [PHP]: https://www.php.net
 [mhahnFr]: https://www.github.com/mhahnFr
+[nijakow]: https://www.github.com/nijakow
